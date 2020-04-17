@@ -21,7 +21,7 @@ def mirror_string(a):
 
 discriminant2=lambda a,b,c: b**2-4*a*c
 
-
+full_name=lambda list1,list2: list1 + " " +list2
 
 print(xor(0,0,0))
 print(xor(0,0,1))
