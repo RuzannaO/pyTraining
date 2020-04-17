@@ -6,6 +6,19 @@ def all_positive(*args):
 def xor (a,b,c):
     return c and ((not a and not b) or (a and b)) or not c and((not a and b) or (a and not b))
 
+def mirror_string(a):
+    b = ""
+    for i in a:
+        if ord(i) <= 122 and ord(i) >= 97:
+            b = b + chr(122 - (ord(i) - 97))
+        else:
+            if ord(i) <= 90 and ord(i) >= 65:
+                b = b + chr(90 - (ord(i) - 65))
+            else:
+                b = b + i
+    return(b)
+
+
 
 print(xor(0,0,0))
 print(xor(0,0,1))
