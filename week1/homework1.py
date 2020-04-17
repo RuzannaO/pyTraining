@@ -19,6 +19,9 @@ def mirror_string(a):
     return(b)
 
 
+discriminant2=lambda a,b,c: b**2-4*a*c
+
+
 
 print(xor(0,0,0))
 print(xor(0,0,1))
