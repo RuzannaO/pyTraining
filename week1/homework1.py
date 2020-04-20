@@ -6,6 +6,7 @@ def all_positive(*args):
 def xor (a,b,c):
     return c and ((not a and not b) or (a and b)) or not c and((not a and b) or (a and not b))
 
+
 def mirror_string(a):
     b = ""
     for i in a:
@@ -18,6 +19,7 @@ def mirror_string(a):
                 b = b + i
     return(b)
 
+
 def bit_concat(a):
     new_list = [f'{x:08b}' for x in a]
     result = []
@@ -29,6 +31,7 @@ def bit_concat(a):
 
 def binary_sum(a,b):
     return(int(a,2)+int(b,2))
+
 
 def only_names(a):
     i=0
