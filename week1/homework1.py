@@ -1,9 +1,5 @@
-def all_positive(*args):
-    s=1
-    for i in args:
-        s=s*i
-        print(s,i)
-    return not (s+abs(s))
+def all_positive (*args):
+    return len(list(filter(lambda x: x < 0, args))) > 0
 
 
 
