@@ -3,7 +3,7 @@ def all_positive(*args):
 
 
 
-def xor (a,b,c):
+def xor3 (a,b,c):
     return c and ((not a and not b) or (a and b)) or not c and((not a and b) or (a and not b))
 
 
@@ -29,7 +29,7 @@ def bit_concat(a):
     return int("".join(result), 2)
 
 
-def binary_sum(a,b):
+def binary_sum (a,b):
     return(int(a,2)+int(b,2))
 
 
@@ -47,17 +47,4 @@ discriminant=lambda a,b,c: b**2-4*a*c
 
 full_name=lambda list1,list2: list1 + " " +list2
 
-print(xor(0,0,0))
-print(xor(0,0,1))
-print(xor(0,1,0))
-print(xor(0,1,1))
-print(xor(1,0,0))
-print(xor(1,0,1))
-print(xor(1,1,0))
-print(xor(1,1,1))
 
-
-
-
-print(bit_concat([22, 21, 20, 255]))
-print (all_positive(-1))
