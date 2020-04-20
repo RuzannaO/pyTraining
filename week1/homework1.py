@@ -1,5 +1,10 @@
 def all_positive(*args):
-    return len([x for x in args if x<0])>=1
+    s=1
+    for i in args:
+        s=s*i
+        print(s,i)
+    return not (s+abs(s))
+
 
 
 
