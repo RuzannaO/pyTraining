@@ -18,6 +18,15 @@ def mirror_string(a):
                 b = b + i
     return(b)
 
+def bit_concat(a):
+    new_list = [f'{x:08b}' for x in a]
+    result = []
+    for i in range(0, len(new_list)):
+        result.append((new_list[i])[len(new_list[i])-2*i-2:len(new_list[i])-2*i])
+    result.reverse()
+    return int("".join(result), 2)
+
+
 
 def binary_sum(a,b):
     return(int(a,2)+int(b,2))
@@ -39,5 +48,5 @@ print(xor(1,1,1))
 
 
 
-
+print(bit_concat([22, 21, 20, 255]))
 print (all_positive(-1))
