@@ -27,12 +27,20 @@ def bit_concat(a):
     return int("".join(result), 2)
 
 
-
 def binary_sum(a,b):
     return(int(a,2)+int(b,2))
 
+def only_names(a):
+    i=0
+    while i<len(a):
+        if len(a[i])==0:
+            a.remove(a[i])
+        i=i+1
+    return a
+
 
 discriminant2=lambda a,b,c: b**2-4*a*c
+
 
 full_name=lambda list1,list2: list1 + " " +list2
 
