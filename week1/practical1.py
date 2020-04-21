@@ -29,3 +29,8 @@ def is_polindrome(a):
         return False
     else:
         return True
+    
+    
+def last_digits(a):
+    b = a % 20
+    return round((b*(b + 1) * (2 * b + 1) / 6) % 10)
