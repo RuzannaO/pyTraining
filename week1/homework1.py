@@ -35,12 +35,7 @@ def binary_sum (a,b):
 
 
 def only_names(a):
-    i=0
-    while i<len(a):
-        if len(a[i])==0:
-            a.remove(a[i])
-        i=i+1
-    return a
+    return len(a)!=0
 
 
 discriminant=lambda a,b,c: b**2-4*a*c
