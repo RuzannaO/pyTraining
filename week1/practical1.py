@@ -14,7 +14,8 @@ def implications3(a,b,c):
 
     return result
   
-
+def quick_or (a):
+    return len (list (filter (lambda x: x==False,a))) > 0
     
     
 def is_polindrome(a):
