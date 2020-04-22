@@ -98,6 +98,6 @@ def is_polindrome(a):
         return True
     
     
-def last_digits(a):
+def last_digit(a):
     b = a % 20
     return round((b*(b + 1) * (2 * b + 1) / 6) % 10)
