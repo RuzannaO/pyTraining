@@ -82,7 +82,7 @@ print(expr_value("6-5*4/3+3-2*4"))
 
 
 def quick_or (a):
-    return len (list (filter (lambda x: x==False,a))) > 0
+    return len(list(filter(lambda x: x==False, a)))!=len(a)
     
     
 def is_polindrome(a):
