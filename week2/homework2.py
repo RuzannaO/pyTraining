@@ -9,7 +9,7 @@ def bisec(a,x=0):
 
 
 def bisect_position(a,n):
-    if n <= a[0]:
+    if (len(a)==0) or n <= a[0]:
         return 0
     if n >= a[-1]:
         return len(a)
