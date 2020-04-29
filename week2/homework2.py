@@ -36,7 +36,7 @@ def all_sums(n):
 
     return list
 
-def dublicate_character(a):
+def dublicate_characters(a):
     d=defaultdict(int)
     for i in a:
         if a.count(i)>1 and i!=" ":
@@ -99,3 +99,6 @@ def sort_list(a,b="ascending"):
             a.remove(min(a))
         return new_list
 
+print(compare_lists([1,1,5,4,2,1,2], [5,1,1,2,4,1,2]))
+
+print(dublicate_characters("here we have some duplicates"))
