@@ -16,4 +16,11 @@ df1 = pd.read_csv('netflix_titles.csv',parse_dates = ['date_added'])
 df2=df1[(df1['release_year']>2015) & ((df1["cast"].str.contains('Leonardo DiCaprio'))|(df1["cast"].str.contains('Kevin Spacey')))]
 print(len(df2))
 
+def direct(a):
+    df4 = df1.groupby(['director']).count()
+    df4.reset_index(inplace=True)
+    df5 = df4[(df4["director"].str.contains(a))]
+    list1 = list(df5['show_id'])
+    return(sum(list1))
 
+print(direct("Rene Bueno"))
