@@ -42,3 +42,23 @@ movies1.columns=['show_id','type', 'title', 'director', 'country', 'date_added',
 movies1.drop('level_11',axis=1,inplace=True)
 print(movies1)
 
+
+#5. Find all movies with Antonio Banderas starring. Sort by date and plot durations.
+
+
+def cleanup(x):
+    if 'Season' in x:
+        return 30
+    else:
+        return int(x.split(" ")[0])
+
+
+movies = pd.read_csv('netflix_titles.csv' )
+movies['date_added'] = pd.to_datetime(movies['date_added'])
+movies['cast'].fillna('None', inplace=True)
+movies['duration_fixed']=movies['duration'].apply(cleanup)
+# didn't use 'inplace' because it was returning a warning  - 'A value is trying to be set on a copy of a slice from a DataFrame"
+movies1=movies[movies['cast'].str.contains('Antonio Banderas')]
+# didn't use 'inplace' because it was returning a warning  - 'A value is trying to be set on a copy of a slice from a DataFrame"
+movies1=movies1.sort_values(['duration_fixed','date_added'])
+print(movies1[['title', 'date_added','duration_fixed']])
