@@ -26,3 +26,16 @@ def direct(a):
     return(sum(list1))
 
 print(direct("Rene Bueno"))
+
+
+# 4. Find a way to split cast to rows. So, for each movie that have, for example, 
+# 10 actors in 'cast' column it will now have 10 rows with each actor in a row. 
+# The other information should be the same for these 10 rows.
+
+movies = pd.read_csv('netflix_titles.csv')
+movies.set_index(['show_id','type', 'title', 'director', 'country', 'date_added', 'release_year', 'rating', 'duration', 'listed_in', 'description'], inplace=True)
+movies1=movies['cast'].str.split(',', expand=True).stack().reset_index()
+movies1.columns=['show_id','type', 'title', 'director', 'country', 'date_added', 'release_year', 'rating', 'duration', 'listed_in', 'description','level_11','cast']
+movies1.drop('level_11',axis=1,inplace=True)
+print(movies1)
+
