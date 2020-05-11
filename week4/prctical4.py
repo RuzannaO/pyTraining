@@ -13,8 +13,10 @@ print(df)
 2. Find number of movies released after 2015 with either Kevin Spacey or Leonardo DiCaprio starring.
 
 df1 = pd.read_csv('netflix_titles.csv',parse_dates = ['date_added'])
+df1['cast'].fillna('None', inplace=True)
 df2=df1[(df1['release_year']>2015) & ((df1["cast"].str.contains('Leonardo DiCaprio'))|(df1["cast"].str.contains('Kevin Spacey')))]
 print(len(df2))
+
 
 
 # 3.Find number of movies in Netflix for each director. Find a way to add this number to all rows with him. 
