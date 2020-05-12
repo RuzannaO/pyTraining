@@ -62,3 +62,34 @@ movies1=movies[movies['cast'].str.contains('Antonio Banderas')]
 # didn't use 'inplace' because it was returning a warning  - 'A value is trying to be set on a copy of a slice from a DataFrame"
 movies1=movies1.sort_values(['duration_fixed','date_added'])
 print(movies1[['title', 'date_added','duration_fixed']])
+
+
+# 6. Get number of movies added to Netflix in each year+month (2019 October - 15, 2017 September - 20 etc.). Sort by date and draw a plot of counts. Also draw a histogram of counts
+
+
+def dtimes(x):
+    dict_month={"01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun", "07":"Jul","08":"Aug","09":"Sep","10":"Oct","11":"Nov","12":"Dec"}
+
+    return (str(x).split("-")[0]+" "+ dict_month[str(x).split("-")[1]])
+
+
+def draw_plot(charttype, len,width, xaxis,yaxis,color:'lightgreen',linewidth:3,title,rotation,labelsize,name,xlabel,ylabel,skip):
+    fig, name = plt.subplots(figsize=(len, width))
+    if charttype=='bar':
+        name.bar(xaxis, yaxis, color=color, linewidth=linewidth)
+    elif charttype=='plot':
+            name.plot(xaxis, yaxis, color=color, linewidth=linewidth)
+    name.set(xlabel=xlabel, ylabel=ylabel, title=title)
+    plt.xticks(xaxis, rotation=rotation)
+    name.tick_params(labelsize=labelsize)
+    name.set_xticks(name.get_xticks()[::skip])
+    return plt.show()
+
+movies = pd.read_csv('netflix_titles.csv')
+movies['year_month'] = pd.to_datetime(movies['date_added']).dt.to_period('M')
+movies1=(movies.groupby(['year_month']).count())
+movies1.index=movies1.index.map(dtimes)
+print(movies1.head())
+
+draw_plot('plot',10,5,(movies1.index),movies1['show_id'],'lightgreen',3,'Number of movies by NETFLIX','vertical',8,"counts","date","number of movies",2)
+draw_plot('bar',10,5,(movies1.index),movies1['show_id'],'purple',3,'Number of movies by NETFLIX','vertical',8,"counts","date","number of movies",2)
