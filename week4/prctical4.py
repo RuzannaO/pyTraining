@@ -81,7 +81,7 @@ def draw_plot(charttype, len,width, xaxis,yaxis,title,rotation,labelsize,name,xl
     plt.xticks(xaxis, rotation=rotation)
     name.tick_params(labelsize=labelsize)
     name.set_xticks(name.get_xticks()[::skip])
-    return plt.show(block=False), plt.pause(4), plt.close()
+    return plt.show(block=False), plt.pause(3), plt.close()
 
 
 movies = pd.read_csv('netflix_titles.csv')
