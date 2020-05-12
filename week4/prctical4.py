@@ -70,27 +70,28 @@ def dtimes(x):
     return (str(x).split("-")[0]+" "+ dict_month[str(x).split("-")[1]])
 
 
-def draw_plot(charttype, len,width, xaxis,yaxis,color:'lightgreen',linewidth:3,title,rotation,labelsize,name,xlabel,ylabel,skip):
+def draw_plot(charttype, len,width, xaxis,yaxis,title,rotation,labelsize,name,xlabel,ylabel,skip,color='lightgreen',linewidth=3):
     fig, name = plt.subplots(figsize=(len, width))
     if charttype=='bar':
         name.bar(xaxis, yaxis, color=color, linewidth=linewidth)
     elif charttype=='plot':
             name.plot(xaxis, yaxis, color=color, linewidth=linewidth)
+
     name.set(xlabel=xlabel, ylabel=ylabel, title=title)
     plt.xticks(xaxis, rotation=rotation)
     name.tick_params(labelsize=labelsize)
     name.set_xticks(name.get_xticks()[::skip])
-    return plt.show()
+    return plt.show(block=False), plt.pause(4), plt.close()
+
 
 movies = pd.read_csv('netflix_titles.csv')
-movies['year_month'] = pd.to_datetime(movies['date_added']).dt.to_period('M')
-movies1=(movies.groupby(['year_month']).count())
+movies['date_added'] = pd.to_datetime(movies['date_added']).dt.to_period('M')
+
+movies1=(movies.groupby(['date_added']).count())
 movies1.index=movies1.index.map(dtimes)
-print(movies1.head())
 
-draw_plot('plot',10,5,(movies1.index),movies1['show_id'],'lightgreen',3,'Number of movies by NETFLIX','vertical',8,"counts","date","number of movies",2)
-draw_plot('bar',10,5,(movies1.index),movies1['show_id'],'purple',3,'Number of movies by NETFLIX','vertical',8,"counts","date","number of movies",2)
-
+draw_plot('plot',10,5,(movies1.index),movies1['show_id'],'Number of movies by NETFLIX','vertical',8,"counts","date","number of movies",2)
+draw_plot('bar',10,5,(movies1.index),movies1['show_id'],'Number of movies by NETFLIX','vertical',8,"counts","date","number of movies",2,'purple')
 
 # 7.Sort dataset by date_added. Add a column, where each value will show how many days is past since the previous (row) addition to Netflix
 
