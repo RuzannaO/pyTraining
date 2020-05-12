@@ -28,6 +28,7 @@ def direct(a):
     list1 = list(df5['show_id'])
     return(sum(list1))
 
+df1 = pd.read_csv('netflix_titles.csv',parse_dates = ['date_added'])
 print(direct("Rene Bueno"))
 
 
