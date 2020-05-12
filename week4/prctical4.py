@@ -53,17 +53,13 @@ def cleanup(x):
     else:
         return int(x.split(" ")[0])
 
-
-movies = pd.read_csv('netflix_titles.csv' )
-movies['date_added'] = pd.to_datetime(movies['date_added'])
+movies = pd.read_csv('netflix_titles.csv', parse_dates=["date_added"] )
 movies['cast'].fillna('None', inplace=True)
 movies['duration_fixed']=movies['duration'].apply(cleanup)
-# didn't use 'inplace' because it was returning a warning  - 'A value is trying to be set on a copy of a slice from a DataFrame"
 movies1=movies[movies['cast'].str.contains('Antonio Banderas')]
-# didn't use 'inplace' because it was returning a warning  - 'A value is trying to be set on a copy of a slice from a DataFrame"
 movies1=movies1.sort_values(['duration_fixed','date_added'])
-print(movies1[['title', 'date_added','duration_fixed']])
 
+print(movies1[['cast','date_added','duration_fixed']])
 
 # 6. Get number of movies added to Netflix in each year+month (2019 October - 15, 2017 September - 20 etc.). Sort by date and draw a plot of counts. Also draw a histogram of counts
 
