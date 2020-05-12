@@ -93,3 +93,22 @@ print(movies1.head())
 
 draw_plot('plot',10,5,(movies1.index),movies1['show_id'],'lightgreen',3,'Number of movies by NETFLIX','vertical',8,"counts","date","number of movies",2)
 draw_plot('bar',10,5,(movies1.index),movies1['show_id'],'purple',3,'Number of movies by NETFLIX','vertical',8,"counts","date","number of movies",2)
+
+
+# 7.Sort dataset by date_added. Add a column, where each value will show how many days is past since the previous (row) addition to Netflix
+
+movies = pd.read_csv('netflix_titles.csv')
+movies['date'] = pd.to_datetime(movies['date_added']).dt.to_period('D')
+movies.sort_values(by="date",inplace=True)
+movies.reset_index(inplace=True)
+list1=['0']
+for i in range(1,len(movies['date'])):
+    list1.append((str(movies['date'][i]-movies['date'][i-1]).split('*')[0][1:-1]))
+for j in range(0,len(list1)):
+    if list1[j]=='Day':
+        list1[j]="1"
+    elif list1[j]=='a':
+        list1[j]='0'
+list1=list(map(int,list1))
+movies['days_passed']=list1
+print(movies['days_passed'])
