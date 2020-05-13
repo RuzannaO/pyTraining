@@ -148,10 +148,9 @@ and the other row values should be number of days past since the previous additi
 
 
 movies = pd.read_csv('netflix_titles.csv')
-movies['date'] = pd.to_datetime(movies['date_added']).dt.to_period('D')
+movies['date_added'] = pd.to_datetime(movies['date_added']).dt.to_period('D')
 movies.sort_values(['director','date_added'], inplace=True)
 movies.reset_index(inplace=True)
-
 
 list1=[-1]
 for i in range(1,len(movies)):
@@ -162,7 +161,7 @@ for i in range(1,len(movies)):
 
 for i in range(1,len(list1)):
     if list1[i]==0:
-        a=(str(movies['date'][i]-movies['date'][i-1]).split('*')[0][1:-1])
+        a=(str(movies['date_added'][i]-movies['date_added'][i-1]).split('*')[0][1:-1])
         if a!='Day':
             list1[i]=int(a)
         else:
