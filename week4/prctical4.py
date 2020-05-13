@@ -127,6 +127,10 @@ def number_days(x):
     return int(str(x)[:str(x).index('d')])
 
 # version2  - Warning 'A value is trying to be set on a copy of a slice from a DataFrame'
+def number_days(x):
+    return int(str(x)[:str(x).index('d')])
+
+
 movies = pd.read_csv('netflix_titles.csv',parse_dates=['date_added'])
 movies.sort_values(["date_added"],inplace=True)
 movies1=movies.groupby(['date_added']).count()
