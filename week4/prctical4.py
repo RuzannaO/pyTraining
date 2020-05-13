@@ -21,15 +21,26 @@ print(len(df2))
 
 
 # 3.Find number of movies in Netflix for each director. Find a way to add this number to all rows with him. 
-def direct(a):
-    df4 = df1.groupby(['director']).count()
+def direct(a,df):
+    if a=='':
+        return"None"
+    df4 = df.groupby(['director']).count()
     df4.reset_index(inplace=True)
     df5 = df4[(df4["director"].str.contains(a))]
-    list1 = list(df5['show_id'])
-    return(sum(list1))
+    return (sum(df5['show_id']))
 
-df1 = pd.read_csv('netflix_titles.csv',parse_dates = ['date_added'])
-print(direct("Rene Bueno"))
+df1 = pd.read_csv('netflix_titles.csv')
+
+df1['director'].fillna('', inplace=True)
+list1=[]
+for i in df1['director']:
+    if i == '':
+        list1.append("None")
+    else:
+        list1.append(direct(str(i),df1))
+
+df1['number_of_films']=list1
+print(df1[['number_of_films','director']])
 
 
 # 4. Find a way to split cast to rows. So, for each movie that have, for example, 
