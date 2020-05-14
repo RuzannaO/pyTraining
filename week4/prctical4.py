@@ -3,11 +3,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 
-2. Find number of movies released after 2015 with either Kevin Spacey or Leonardo DiCaprio starring.
+1. (easy) Create a pandas dataframe with information of this group students and tutors. 
+The information should contain name, surname, sex, the approximate age group (e.g. 20-30 or 30-35), 
+status (student or tutor). Set as index some unique column(s) that you think can be useful as index
+
 df = pd.DataFrame(columns=['Name', 'Sirname', 'sex', 'appx age', 'status'])
-df['Name']=['Arman','Narek','Norik','Zarmik']
-df['status']=['student','tutor','student','tutor']
-df.set_index('status',inplace=True)
+df['Sirname']=["Sahakyan","Kirakosyan","Kirakosyan",'Varosyan','Karyan', "Ordyan",'Hakobyan','Poghosyan']
+df['Name']=['Hayk','Anahit','Sona','Liana','Jora','Ruzanna','Nairi','Vladimir']
+df['status']=['student','student','student','student','student','student','tutor','tutor']
+df['sex']=['M','F','F','F','M','F','M','M']
+df['appx age']=['20-35','20-35','20-35','20-35','20-35','20-35','20-35','20-35']
+df.set_index('Name',inplace=True)
 
 print(df)
 
