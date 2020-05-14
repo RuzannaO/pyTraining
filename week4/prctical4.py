@@ -80,6 +80,19 @@ movies1.drop('level_11',axis=1,inplace=True)
 print(movies1)
 
 
+def to_list(x):
+    return str(x).split(',')
+
+movies = pd.read_csv('netflix_titles.csv')
+movies['cast']=movies['cast'].apply(to_list)
+movies1=movies.explode('cast')
+
+
+print(movies1)
+
+
+
+
 #5. Find all movies with Antonio Banderas starring. Sort by date and plot durations.
 
 
