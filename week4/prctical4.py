@@ -157,6 +157,24 @@ for i in range(1,len(movies1)):
 movies1['#days']=movies1['#days'].map(number_days)
 print(movies1[['date_added','#days']])
 
+# another verion
+
+movies = pd.read_csv('netflix_titles.csv',parse_dates=['date_added'])
+movies.sort_values(["date_added"],inplace=True)
+movies1=movies.groupby(['date_added']).count()
+movies1.reset_index(inplace=True)
+
+movies1['#days']='0 days'
+for i in movies1.index:
+    if i == 0:
+        movies1._set_value(i, '#days', 0)
+
+    else:
+        movies1._set_value(i,'#days',(movies1.loc[i]['date_added']-movies1.loc[i-1]['date_added']))
+
+# movies1['#days']=movies1['#days'].map(number_days)
+print(movies1['#days'])
+
 8.  Do the same as previous, but for each director. So, for each first row with some director the value should be -1, 
 and the other row values should be number of days past since the previous addition of row with that director.
 
@@ -183,17 +201,4 @@ for i in range(1,len(list1)):
 movies['days_passed']=list1
 
 print(movies[['director','date_added','days_passed']])
-
-
-
-
-
-
-
-
-
-
-
-
-
 
