@@ -72,13 +72,6 @@ print(df1.head())
 # 10 actors in 'cast' column it will now have 10 rows with each actor in a row. 
 # The other information should be the same for these 10 rows.
 
-movies = pd.read_csv('netflix_titles.csv')
-movies.set_index(['show_id','type', 'title', 'director', 'country', 'date_added', 'release_year', 'rating', 'duration', 'listed_in', 'description'], inplace=True)
-movies1=movies['cast'].str.split(',', expand=True).stack().reset_index()
-movies1.columns=['show_id','type', 'title', 'director', 'country', 'date_added', 'release_year', 'rating', 'duration', 'listed_in', 'description','level_11','cast']
-movies1.drop('level_11',axis=1,inplace=True)
-print(movies1)
-
 
 def to_list(x):
     return str(x).split(',')
@@ -87,10 +80,7 @@ movies = pd.read_csv('netflix_titles.csv')
 movies['cast']=movies['cast'].apply(to_list)
 movies1=movies.explode('cast')
 
-
 print(movies1)
-
-
 
 
 #5. Find all movies with Antonio Banderas starring. Sort by date and plot durations.
