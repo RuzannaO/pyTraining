@@ -3,6 +3,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 
+def draw_plot(charttype, len,width, xaxis,yaxis,title,rotation,labelsize,name,xlabel,ylabel,skip,color='lightgreen',linewidth=3):
+    fig, name = plt.subplots(figsize=(len, width))
+    if charttype=='bar':
+        name.bar(xaxis, yaxis, color=color, linewidth=linewidth)
+    elif charttype=='plot':
+            name.plot(xaxis, yaxis, color=color, linewidth=linewidth)
+
+    name.set(xlabel=xlabel, ylabel=ylabel, title=title)
+    plt.xticks(xaxis, rotation=rotation)
+    name.tick_params(labelsize=labelsize)
+    name.set_xticks(name.get_xticks()[::skip])
+    return plt.show(block=False), plt.pause(3), plt.close()
+
 1. (easy) Create a pandas dataframe with information of this group students and tutors. 
 The information should contain name, surname, sex, the approximate age group (e.g. 20-30 or 30-35), 
 status (student or tutor). Set as index some unique column(s) that you think can be useful as index
@@ -84,6 +97,8 @@ movies1=movies1.sort_values(['duration_fixed','date_added'])
 
 print(movies1[['cast','date_added','duration_fixed']])
 
+draw_plot('plot',10,5,movies1['date_added'],movies1['duration_fixed'], 'Antonio Banderas films duration','vertical',5,plt,'date','duration',1)
+
 # 6. Get number of movies added to Netflix in each year+month (2019 October - 15, 2017 September - 20 etc.). Sort by date and draw a plot of counts. Also draw a histogram of counts
 
 
@@ -91,20 +106,6 @@ def dtimes(x):
     dict_month={"01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun", "07":"Jul","08":"Aug","09":"Sep","10":"Oct","11":"Nov","12":"Dec"}
 
     return (str(x).split("-")[0]+" "+ dict_month[str(x).split("-")[1]])
-
-
-def draw_plot(charttype, len,width, xaxis,yaxis,title,rotation,labelsize,name,xlabel,ylabel,skip,color='lightgreen',linewidth=3):
-    fig, name = plt.subplots(figsize=(len, width))
-    if charttype=='bar':
-        name.bar(xaxis, yaxis, color=color, linewidth=linewidth)
-    elif charttype=='plot':
-            name.plot(xaxis, yaxis, color=color, linewidth=linewidth)
-
-    name.set(xlabel=xlabel, ylabel=ylabel, title=title)
-    plt.xticks(xaxis, rotation=rotation)
-    name.tick_params(labelsize=labelsize)
-    name.set_xticks(name.get_xticks()[::skip])
-    return plt.show(block=False), plt.pause(3), plt.close()
 
 
 movies = pd.read_csv('netflix_titles.csv')
