@@ -14,7 +14,7 @@ def draw_plot(charttype, len,width, xaxis,yaxis,title,rotation,labelsize,name,xl
     plt.xticks(xaxis, rotation=rotation)
     name.tick_params(labelsize=labelsize)
     name.set_xticks(name.get_xticks()[::skip])
-    return plt.show(block=False), plt.pause(3), plt.close()
+    return plt.show(block=False), plt.pause(10), plt.close()
 
 1. (easy) Create a pandas dataframe with information of this group students and tutors. 
 The information should contain name, surname, sex, the approximate age group (e.g. 20-30 or 30-35), 
