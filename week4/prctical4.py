@@ -96,9 +96,7 @@ movies = pd.read_csv('netflix_titles.csv', parse_dates=["date_added"] )
 movies['cast'].fillna('None', inplace=True)
 movies['duration_fixed']=movies['duration'].apply(cleanup)
 movies1=movies[movies['cast'].str.contains('Antonio Banderas')]
-movies1=movies1.sort_values(['duration_fixed','date_added'])
-
-print(movies1[['cast','date_added','duration_fixed']])
+movies1.sort_values(['date_added','duration_fixed'],inplace=True)
 
 draw_plot('plot',10,5,movies1['date_added'],movies1['duration_fixed'], 'Antonio Banderas films duration','vertical',5,plt,'date','duration',1)
 
