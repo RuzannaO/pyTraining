@@ -26,26 +26,33 @@ print(len(df2))
 
 
 # 3.Find number of movies in Netflix for each director. Find a way to add this number to all rows with him. 
-def direct(a,df):
+def direct_easy(a,df):
     if a=='':
         return"None"
-    df4 = df.groupby(['director']).count()
-    df4.reset_index(inplace=True)
-    df5 = df4[(df4["director"].str.contains(a))]
+    df = df.groupby(['director']).count()
+    return(df.loc[a][0])
+
+
+def direct_split(a,df):
+    if a=='':
+        return"None"
+    df = df.groupby(['director']).count()
+    df.reset_index(inplace=True)
+    df5 = df[(df["director"].str.contains(a))]
     return (sum(df5['show_id']))
 
 df1 = pd.read_csv('netflix_titles.csv')
+print('# films by Gerardo Olivares /easy/', direct_easy('Gerardo Olivares',df1))
+print('# films by Gerardo Olivares /split/',direct_split('Gerardo Olivares',df1))
 
 df1['director'].fillna('', inplace=True)
-list1=[]
-for i in df1['director']:
-    if i == '':
-        list1.append("None")
-    else:
-        list1.append(direct(str(i),df1))
+df1['number_of_films']=''
+df1.set_index(['director'],inplace=True)
 
-df1['number_of_films']=list1
-print(df1[['number_of_films','director']])
+for i in df1.index:
+    df1._set_value(i,'number_of_films',direct_easy(i,df1))
+print(df1.head())
+
 
 
 # 4. Find a way to split cast to rows. So, for each movie that have, for example, 
