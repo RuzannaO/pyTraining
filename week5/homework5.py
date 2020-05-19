@@ -37,3 +37,51 @@ class Person:
             self.student=Student
     def __getPassword(self,Password):
         self.__password=Password
+        
+        
+        
+# 3. Write classes named Polygon, Quadrilateral, Rectangle, Square which should be inhereted from higher classes.
+
+import math
+
+
+class Polygon:
+    a = []
+    def __init__(self,number_of_sides):
+        self.n=number_of_sides
+
+    def inputSides(self):
+        for i in range (0,self.n):
+            self.a.append(float(input()))
+
+    def perimeter(self):
+        if len(self.a)==2:
+            return 2*(self.a[0]+self.a[1])
+        else:
+            if len(self.a)==1:
+                return 4*self.a[0]
+            else:
+                return(sum(self.a))
+
+class Quadrilateral(Polygon):
+    def __init__(self):
+        Polygon.__init__(self,4)
+
+class Rectangle(Quadrilateral):
+    def __init__(self):
+        Quadrilateral.__init__(self)
+        self.n=2
+    def area(self):
+        if len(self.a)==2:
+            return Quadrilateral.a[0]*Quadrilateral.a[1]
+        else:
+            return Quadrilateral.a[0]**2
+
+class Square(Rectangle):
+    def __init__(self):
+        Rectangle.__init__(self)
+        self.n=1
+
+
+        
+        
