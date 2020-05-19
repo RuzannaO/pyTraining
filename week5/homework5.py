@@ -43,8 +43,6 @@ class Person:
 # 3. Write classes named Polygon, Quadrilateral, Rectangle, Square which should be inhereted from higher classes.
 
 import math
-
-
 class Polygon:
     a = []
     def __init__(self,number_of_sides):
