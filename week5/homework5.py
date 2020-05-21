@@ -28,13 +28,14 @@ p1=rom_num('IV')
         
 # 2. Create a class Person.
 
+
 class Person:
     def __init__(self,name,last_name):
         self.name=name
         self.last_name=last_name
         self.age="age NA"
         self.gender="gender NA"
-        self.student="Student NA"
+        self.student=False
         self.__password="PWD NA"
     def  greet(self,second_person):
         return("welcome, dear", second_person)
@@ -42,55 +43,63 @@ class Person:
         return("Goodbye everyone!")
     def Favorite_num(self,num1):
         return("Hello,my favorite number is ",num1)
-    def getAge(self,age_years):
+    def setAge(self,age_years):
             self.age=age_years
-    def getGender(self,Gender):
+    def setGender(self,Gender):
             self.gender=Gender
-    def getStudent(self,Student):
+    def setStudent(self,Student:bool):
             self.student=Student
     def __getPassword(self,Password):
         self.__password=Password
+
+x=Person("Arman","Petrosyan")
+
+print(x.student)
+x.setStudent(True)
+print(x.student)
         
         
         
 # 3. Write classes named Polygon, Quadrilateral, Rectangle, Square which should be inhereted from higher classes.
 
-import math
 class Polygon:
-    a = []
-    def __init__(self,number_of_sides):
-        self.n=number_of_sides
+    def __init__(self, n_of_sides):
+        self.n = n_of_sides
+        self.sides = list()
 
-    def inputSides(self):
-        for i in range (0,self.n):
-            self.a.append(float(input()))
+    def input_sides(self, sides):
+        self.sides = sides
 
-    def perimeter(self):
-        if len(self.a)==2:
-            return 2*(self.a[0]+self.a[1])
-        else:
-            if len(self.a)==1:
-                return 4*self.a[0]
-            else:
-                return(sum(self.a))
+    def disp_sides(self):
+        for i in range(self.n):
+            print("Side", i + 1, "is", self.sides[i])
+
+    def get_perimeter(self):
+        return sum(self.sides)
 
 class Quadrilateral(Polygon):
     def __init__(self):
-        super().__init__(4)
+        Polygon.__init__(self,4)
 
 class Rectangle(Quadrilateral):
     def __init__(self):
         super(Quadrilateral,self).__init__(2)
 
     def area(self):
-        if len(self.a)==2:
-            return Quadrilateral.a[0]*Quadrilateral.a[1]
+        if len(self.sides)==2:
+            return self.sides[0]*self.sides[1]
         else:
-            return Quadrilateral.a[0]**2
-
+            return self.sides[0]**2
 class Square(Rectangle):
     def __init__(self):
         super(Quadrilateral,self).__init__(1)
+
+
+
+a1=Quadrilateral()
+a1.input_sides([1,2,3,5])
+
+print(a1.get_perimeter())
 
 
 
