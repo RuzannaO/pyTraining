@@ -63,12 +63,12 @@ class Polygon:
 
 class Quadrilateral(Polygon):
     def __init__(self):
-        Polygon.__init__(self,4)
+        super().__init__(4)
 
 class Rectangle(Quadrilateral):
     def __init__(self):
-        Quadrilateral.__init__(self)
-        self.n=2
+        super(Quadrilateral,self).__init__(2)
+
     def area(self):
         if len(self.a)==2:
             return Quadrilateral.a[0]*Quadrilateral.a[1]
@@ -77,8 +77,9 @@ class Rectangle(Quadrilateral):
 
 class Square(Rectangle):
     def __init__(self):
-        Rectangle.__init__(self)
-        self.n=1
+        super(Quadrilateral,self).__init__(1)
+
+
 
 
         
