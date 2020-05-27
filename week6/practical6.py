@@ -43,3 +43,122 @@ print(type(a.radius))
 b=Circle(5.0,"green")
 print(a-b,"a-b")
 print(a**(-1),"a**b")
+
+
+# 2. For Roman Numeral class from previous homework override basic mathematical operations (+,-,*,//,**)
+class RomanNumber:
+    def __init__(self, roman_number):
+        self.number = roman_number
+        if not (isinstance(self.number, str)):
+            raise TypeError(f'input must be a string, another type is detected!  {self.number}  {type(self.number)}')
+        if (any(x.islower() for x in self.number)):
+            raise IOError('Incorrect input, no lowercase letters allowed!   %s  ' % self.number)
+
+    def get_num(self):
+        return self.number
+
+    def set_num(self, num1):
+        self.number = num1
+    def convert_to_roman(self, num):
+
+        val = [1000, 900, 500, 400,100, 90, 50, 40,10, 9, 5, 4,1]
+        syb = ["M", "CM", "D", "CD","C", "XC", "L", "XL","X", "IX", "V", "IV","I"]
+        roman_num = ''
+        i = 0
+        if not 0 < num < 4000:
+            raise ValueError(f'Argument must be between 1 and 3999, we got {num}')
+        assert (isinstance(num,int) and num > 0),(f'make sure the number is a positive integer, we got {num}')
+        while num > 0:
+            for _ in range(num // val[i]):
+                roman_num += syb[i]
+                num -= val[i]
+            i += 1
+        return roman_num
+    def convert_to_num(self):
+        num_dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        result = 0
+        try:
+            for key, value in enumerate(self.number):
+                if (key + 1) == len(self.number) or num_dict[value] >= num_dict[self.number[key + 1]]:
+                    result += num_dict[value]
+                else:
+                    result -= num_dict[value]
+        except KeyError:
+            raise ValueError ('input is not a valid Roman numeral: %s' % self.number)
+
+        if self.convert_to_roman(result)!=self.number:
+            raise IOError (f'Invalid input, can not read as a Roman numeral {self.number}')
+        else:
+            return result
+    def __str__(self):
+        return (f'{self.number}')
+    def __add__(self, other):
+        return RomanNumber(self.convert_to_roman(self.convert_to_num() + other.convert_to_num()))
+    def __sub__(self, other):
+        return RomanNumber(self.convert_to_roman(self.convert_to_num() - other.convert_to_num()))
+    def __mul__(self, other):
+        return RomanNumber(self.convert_to_roman(self.convert_to_num() * other.convert_to_num()))
+    def __pow__(self,pow):
+        return RomanNumber(self.convert_to_roman(self.convert_to_num() ** pow))
+    def __floordiv__(self, other):
+        return RomanNumber(self.convert_to_roman(self.convert_to_num() // other.convert_to_num()))
+
+
+a=RomanNumber("MMMCMXCIX")
+b=RomanNumber(["L"])
+print((a))
+
+# 4. For Polygon, Quadrilateral, Rectangle and Square classes from the previous homework add validations of number of sides.
+class Polygon:
+    def __init__(self, n_of_sides):
+        self.n = n_of_sides
+        self.sides = list()
+
+    def input_sides(self, sides):
+        self.sides = sides
+        if not(isinstance(self.sides,list)):
+            raise TypeError ('input must be a list, another type is detected!   %s ' % type(self.sides))
+        assert len([x for x in self.sides if isinstance(x,str)])==0, "no str value acceptable for a side"
+        assert len(self.sides) == self.n, "Incorrect number of sides"
+        assert len([x for x in self.sides if x<0])==0, "you have entered a negative value for a side"
+        assert len([x for x in self.sides if isinstance(x,bool)])==0, "no boolean value acceptable for a side"
+
+    def disp_sides(self):
+
+        assert len(self.sides)!=0, "No sides data entered"
+        for i in range(self.n):
+            print("Side", i + 1, "is", self.sides[i])
+
+    def get_perimeter(self):
+        return sum(self.sides)
+
+class Quadrilateral(Polygon):
+    def __init__(self):
+        super().__init__(4)
+
+class Rectangle(Quadrilateral):
+    #     def __init__(self):
+    #         super().__init__()
+    def input_sides(self, s):
+        super().input_sides(s * 2)
+        print(len(self.sides),self.n)
+    def get_area(self):
+        return self.sides[0] * self.sides[1]
+
+class Square(Rectangle):
+    #     def __init__(self):
+    #         super().__init__()
+    def input_sides(self, s):
+        super().input_sides(s * 2)
+
+
+a=Rectangle()
+a.input_sides([2,2.2])
+print(a.disp_sides())
+print(a.get_perimeter())
+# print(a.get_area())
+
+
+
+
+
