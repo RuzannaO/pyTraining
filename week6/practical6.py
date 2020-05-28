@@ -158,8 +158,11 @@ class Person:
 a=Person("arman","Petrosyan",100,"Male",True,"kokokok")
 
 # 4. For Polygon, Quadrilateral, Rectangle and Square classes from the previous homework add validations of number of sides.
+
 class Polygon:
     def __init__(self, n_of_sides):
+        if not isinstance(n_of_sides,int):
+            raise TypeError (f'Number of sides must be int type. ')
         self.n = n_of_sides
         self.sides = list()
 
@@ -186,11 +189,9 @@ class Quadrilateral(Polygon):
         super().__init__(4)
 
 class Rectangle(Quadrilateral):
-    #     def __init__(self):
-    #         super().__init__()
+
     def input_sides(self, s):
         super().input_sides(s * 2)
-        print(len(self.sides),self.n)
     def get_area(self):
         return self.sides[0] * self.sides[1]
 
@@ -205,7 +206,6 @@ a=Rectangle()
 a.input_sides([2,2.2])
 print(a.disp_sides())
 print(a.get_perimeter())
-# print(a.get_area())
 
 
 
