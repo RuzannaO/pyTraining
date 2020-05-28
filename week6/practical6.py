@@ -108,6 +108,55 @@ a=RomanNumber("MMMCMXCIX")
 b=RomanNumber(["L"])
 print((a))
 
+
+# 3 Class Person
+
+
+class Person:
+    def __init__(self, name, last_name, age, gender, student, password):
+        print(type(gender))
+        assert (not(list(x for x in [name,last_name,gender,password] if type(x)!=str))),"name,last_name,gender,pasword - all must be string values. Please, check again!"
+        assert ((isinstance(age,int)) and age<=150 and age>0), "Age input should be integer between 0 to 150"
+
+        self.name = name
+        self.last_name = last_name
+        self.age = age
+        self.gender = gender
+        self.__password = password
+
+        if isinstance(student, bool):
+            self.student = student
+        else:
+            raise Exception("Student attribute takes values True or False")
+
+    def Read_file(self,filename):
+        assert (isinstance(filename,str)),"only string input accepted for filename"
+        assert (len(list(x for x in filename if x in ('/\:*"<>|')))==0),"Invalid input character"
+        assert (filename[0]!=" " and filename[-1]!=" "), "Please remove space character at the start and/or end of the filename."
+        fullname=filename+'.txt'
+        try:
+            print(fullname)
+            open(fullname)
+        except FileNotFoundError as e:
+            print("no such file exists")
+
+    def Greeting(self, second_person):
+        if not(isinstance(second_person,str)):
+            raise TypeError (f'Please enter string value for person name')
+        else:
+            return f'Welcome dear {second_person}!'
+
+    def Goodbye(self):
+        print("Bye everyone!")
+
+    def Favourite_num(self, num1):
+        if not(isinstance(num1,int)):
+            raise TypeError (f'Please enter integer value for the favorite number.')
+        else:
+            return 'My favorite number is {}'.format(num1)
+
+a=Person("arman","Petrosyan",100,"Male",True,"kokokok")
+
 # 4. For Polygon, Quadrilateral, Rectangle and Square classes from the previous homework add validations of number of sides.
 class Polygon:
     def __init__(self, n_of_sides):
