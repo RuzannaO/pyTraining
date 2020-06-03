@@ -83,20 +83,39 @@ for movie in root.findall("./genre/decade/movie/[year='1992']"):
 
 print("*******************************************************************")
 
-
 # 8. Get attributes of movies that are available in multiple formats
+
 
 for movie in root.iter('movie'):
     name = movie.attrib
     format = movie.find('format').attrib
     if format == {'multiple': 'Yes'}:
         print(name, format)
+      
+# another way
 
-print("********************************************************************")
+for x in root.findall("./genre/decade/movie/format/[@multiple='Yes'].."):
+    print(x.attrib)
 
+print("*********************************************************")
 
+# 9. Change movie title from "Back 2 the Future" to "Back to the Future".
 
+for movie in root.iter('movie'):
+    if movie.get('title') == "Back 2 the Future":
+         movie.set("title", "Back to the Future")
 
+    tree.write('output.xml')
+   
+   
+print("*********************************************************")
 
+# 10. If you look carefully, 'multiple' attribute is written wrongly in some cases. Find a way to fix it.
+
+for format in root.findall("./genre/decade/movie/format"):
+    # print(form.attrib, form.text)
+    if format.attrib=={'multiple': 'False'}:
+        format.set('multiple','No')
+tree.write('output.xml')
 
 
