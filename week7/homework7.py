@@ -119,3 +119,44 @@ for format in root.findall("./genre/decade/movie/format"):
 tree.write('output.xml')
 
 
+# 11. Some of the data has been placed in the wrong decade. Find and fix the decade data errors. Save new document with all this changes to a new .xml file.
+
+# define elements that are in wrong decades
+dict={'1970s':[1970,1979],'1980s':[1980,1989],'1990s':[1990,1999],'2000s':[2000,2009]}
+for  decade in root.iter('decade'):
+    name=movie.attrib
+    for year in decade.iter("year"):
+
+            if int(year.text)>dict[decade.attrib['years']][1] or int(year.text)<dict[decade.attrib['years']][0]:
+                print(decade.attrib, year.text)
+
+
+#two movies(X-men and Pycho) are in wrong decades.
+
+# create a new decade under genre category ='Action', with attribute 'year='2000s', and append it with "X-men"
+new_dec = ET.SubElement(root.find("./genre[@category='Action']"), 'decade')
+new_dec.attrib["years"] = '2000s'
+# decade2000s=root.find("./genre[@category='Action']/decade[@years='2000s']")
+
+xmen = root.find("./genre/decade/movie[@title='X-Men']")
+new_dec.append(xmen)
+# decade2000s.append(xmen)
+
+# remove "X-men" from the wrong decade (years='1990s')
+
+root.find("./genre/[@category='Action']/decade[@years='1990s']").remove(xmen)
+
+# create a new decade under genre category ='Thriller', with attribute 'year='2000s', and append it with "Psycho"
+
+new_dec_thr = ET.SubElement(root.find("./genre[@category='Thriller']/"), 'decade')
+new_dec_thr.attrib['years']='2000s'
+psycho=root.find("./genre/decade/movie[@title='American Psycho']")
+new_dec_thr.append(psycho)
+
+# remove "X-men" from the wrong decade (years='1990s')
+
+root.find("./genre[@category='Thriller']/decade[@years='1980s']").remove(psycho)
+
+# print(ET.tostring(root, encoding='utf8').decode('utf8'))
+
+tree.write('output.xml')
