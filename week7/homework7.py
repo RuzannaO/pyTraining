@@ -2,6 +2,9 @@ import json
 import pprint
 import xml.etree.ElementTree as ET
 
+1. Write a Python program to convert Python dictionary object (sort by key) to JSON data. Print the object members with indent level 4.
+mydict={1:"A",9:"B",3:{15:"Hello",16:(67,True)}}
+print(json.dumps(mydict, sort_keys=True, indent=4))
 
 
 # 2. Access the nested key ‘salary’ from the following JSON
