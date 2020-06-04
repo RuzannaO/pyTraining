@@ -114,9 +114,14 @@ print("*********************************************************")
 # 10. If you look carefully, 'multiple' attribute is written wrongly in some cases. Find a way to fix it.
 
 for format in root.findall("./genre/decade/movie/format"):
-    # print(form.attrib, form.text)
     if format.attrib=={'multiple': 'False'}:
         format.set('multiple','No')
+    if len(format.text.split(","))>1:
+        format.set('multiple','Yes')
+    else:
+        format.set('multiple','No')
+for format in root.findall("./genre/decade/movie/format"):
+    print(format.attrib,format.text)
 tree.write('output.xml')
 
 
