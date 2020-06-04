@@ -21,7 +21,7 @@ sampleJson = """{
 }"""
 print(json.loads(sampleJson)["company"]["employee"]["payble"]["salary"])
 
-print("vehicle*****************************************************************")
+print("*****************************************************************")
 
 # 3. Convert the following Vehicle Object into JSON. Is there a better way (format) to save this class? If yes, write a programm to that convertation also.
 
@@ -34,8 +34,6 @@ class Vehicle(object):
 
     def __str__(self):
         return (json.dumps(self.__dict__))
-    def makedict(self):
-            return (json.loads(self.__str__()))
 
 vehicle = Vehicle("Toyota Rav4", "2.5L", 32000)
 print(vehicle)
