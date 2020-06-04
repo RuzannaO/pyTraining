@@ -62,14 +62,9 @@ print("*****************************************************************")
 # 6. Get a list of all tag names in the data in an order that they appear.
 
 tags=[root.tag]
-for i in root:
+for i in root.iter():
     tags.append(i.tag)
-    for j in i:
-        tags.append(j.tag)
-        for k in j:
-            tags.append(k.tag)
-            for n in k:
-                tags.append(n.tag)
+
 
 print([x for i, x in enumerate(tags) if i == tags.index(x)])
 
