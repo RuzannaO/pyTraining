@@ -25,28 +25,36 @@ print("*****************************************************************")
 
 # 3. Convert the following Vehicle Object into JSON. Is there a better way (format) to save this class? If yes, write a programm to that convertation also.
 
-class Vehicle(object):
-    def __init__(self, name, engine, price):
-        self.name = name
-        self.engine = engine
-        self.price = price
-        self. __type__="Vehicle"
-
-    def __str__(self):
-        return (json.dumps(self.__dict__))
-
-vehicle = Vehicle("Toyota Rav4", "2.5L", 32000)
-print(vehicle)
-# 4. Implement the reverse convertion of previous task
-
 def object_decoder(obj):
     if '__type__' in obj and obj['__type__'] == 'Vehicle':
            return Vehicle(obj['name'], obj['engine'],obj['price'])
     return obj
 
-a1 = json.loads(vehicle.__str__(),object_hook=object_decoder)
-print(a1,type(a1))
-print(a1.name)
+class Vehicle(object):
+    def __init__(self, name, engine, price):
+        self.name = name
+        self.engine = engine
+        self.price = price
+        # self. __type__="Vehicle"
+
+    def __str__(self):
+        return (json.dumps(self.__dict__))
+
+def back_to_obj(a):
+    b = json.loads(a.__str__())
+    b["__type__"] = "Vehicle"
+    return json.loads(json.dumps(b),object_hook=object_decoder)
+
+
+vehicle = Vehicle("Toyota Rav4", "2.5L", 32000)
+print(vehicle.__str__())
+
+# 4. Implement the reverse convertion of previous task
+# implementation in the above task
+
+b=vehicle.__str__()
+new_obj=back_to_obj(b)
+print(new_obj.name)
 
 # 5. Read 'movies.xml' file with ElementTree parser and print root's and its children's tags and attributes.
 
