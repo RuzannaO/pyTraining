@@ -25,27 +25,30 @@ print("vehicle*****************************************************************"
 
 # 3. Convert the following Vehicle Object into JSON. Is there a better way (format) to save this class? If yes, write a programm to that convertation also.
 
-class Vehicle:
+class Vehicle(object):
     def __init__(self, name, engine, price):
         self.name = name
         self.engine = engine
         self.price = price
-    def __str__(self):
+        self. __type__="Vehicle"
 
-        jdict={}
-        self.dict=jdict
-        jdict["name"]=self.name
-        jdict["engine"] = self.engine
-        jdict["price"]=self.price
-        return (json.dumps(jdict,indent=4))
+    def __str__(self):
+        return (json.dumps(self.__dict__))
     def makedict(self):
             return (json.loads(self.__str__()))
 
 vehicle = Vehicle("Toyota Rav4", "2.5L", 32000)
 print(vehicle)
-
 # 4. Implement the reverse convertion of previous task
-print(vehicle.makedict())
+
+def object_decoder(obj):
+    if '__type__' in obj and obj['__type__'] == 'Vehicle':
+           return Vehicle(obj['name'], obj['engine'],obj['price'])
+    return obj
+
+a1 = json.loads(vehicle.__str__(),object_hook=object_decoder)
+print(a1,type(a1))
+print(a1.name)
 
 # 5. Read 'movies.xml' file with ElementTree parser and print root's and its children's tags and attributes.
 
