@@ -136,7 +136,7 @@ tree.write('output.xml')
 # define elements that are in wrong decades
 dict={'1970s':[1970,1979],'1980s':[1980,1989],'1990s':[1990,1999],'2000s':[2000,2009]}
 for  decade in root.iter('decade'):
-    name=movie.attrib
+    name=decade.attrib
     for year in decade.iter("year"):
 
             if int(year.text)>dict[decade.attrib['years']][1] or int(year.text)<dict[decade.attrib['years']][0]:
