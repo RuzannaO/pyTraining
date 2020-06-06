@@ -30,6 +30,7 @@ def object_decoder(obj):
            return Vehicle(obj['name'], obj['engine'],obj['price'])
     return obj
 
+
 class Vehicle(object):
     def __init__(self, name, engine, price):
         self.name = name
@@ -39,6 +40,11 @@ class Vehicle(object):
 
     def __str__(self):
         return (json.dumps(self.__dict__))
+    def pickled(self):
+        return(pickle.dumps(self.__dict__))
+    def from_pickle(self):
+        return pickle.loads(self.pickled())
+
 
 def back_to_obj(a):
     b = json.loads(a.__str__())
@@ -47,6 +53,8 @@ def back_to_obj(a):
 
 
 vehicle = Vehicle("Toyota Rav4", "2.5L", 32000)
+print(type(vehicle.from_pickle()))
+print(type(vehicle))
 print(vehicle.__str__())
 
 # 4. Implement the reverse convertion of previous task
